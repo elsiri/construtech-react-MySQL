@@ -17,8 +17,11 @@ function ObrasForm() {
         idEmpl:""
     })
     
-    const inputFechafin = {
+    const inputFechafinDisabled = {
         display: "none"
+    }
+    const inputFechafinEnabled ={
+        color:"red"
     }
     useEffect(() =>{
         const loadObras = async () => {
@@ -83,8 +86,8 @@ function ObrasForm() {
                     <input className="px-2 py-1 rounded-sm w-full" name="fechaini" id="fechaini" type="text" placeholder="Fecha de inicio de obra" onChange={handleChange} value={values.fechaini} />
                     
 
-                        <label className="block" style={params.id ? inputFechafin:""}>Fecha fin</label>
-                        <input className="px-2 py-1 rounded-sm w-full" style={params.id ? inputFechafin:""} name="fechafin" id="fechafin" type="text" placeholder="Fecha de finalizacion de obra" onChange={handleChange} value={values.fechafin} />
+                        <label className="block" style={params.id ? inputFechafinDisabled:inputFechafinEnabled}>Fecha fin</label>
+                        <input className="px-2 py-1 rounded-sm w-full" style={params.id ? inputFechafinDisabled:inputFechafinEnabled} name="fechafin" id="fechafin" type="text" placeholder="Fecha de finalizacion de obra" onChange={handleChange} value={values.fechafin} />
 
                     <button type="submit" disabled={isSubmitting} className="block bg-indigo-500 px-2 py-1 text-white w-full rounded-md mt-3">
                         {params.id ? "Actualizar": "Guardar"}

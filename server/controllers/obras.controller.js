@@ -22,13 +22,18 @@ export const getObra = async (req,res) =>{
 
 export const createObra = async (req,res) =>{
     try {
-        const {descripcion, estado} = req.body
-        const [result] = await pool.query('INSERT INTO obras(descripcion, estado) VALUES(?,?)',[descripcion,estado])
+        const {descripcion, estado, cantidad, fechaini, fechafin, cliente, empleado} = req.body
+        const [result] = await pool.query('INSERT INTO obras(descripcion, estado, cantidad, fechaini, fechafin, idCliente, idEmpl) VALUES(?,?,?,?,?,?,?)',[descripcion, estado, cantidad, fechaini, fechafin, cliente, empleado])
         console.log(result)
         res.json({
             id:"Id insertado:"+result.insertId,
             descripcion,
-            estado
+            estado,
+            cantidad,
+            fechaini,
+            fechafin,
+            cliente,
+            empleado
         })        
     } catch (error) {
         return res.status(500).json({message: error.mensage})

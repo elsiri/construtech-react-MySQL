@@ -29,7 +29,7 @@ function App() {
           <Routes>
             <Route path="/materiales" element={<MaterialesPage />} />
             <Route path="/formMaterial" element={<FormMaterial/>} />
-            <Route path="/formMaterialEdit:id" element={<FormMaterial/>} />
+            <Route path="/formMaterialEdit/:id" element={<FormMaterial/>} />
             {/* <Route path="/materiales/*" element={<NotFound />} /> */}
           </Routes>
         </MaterialContextProvider>

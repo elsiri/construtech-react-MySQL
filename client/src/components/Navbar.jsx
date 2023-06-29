@@ -13,6 +13,9 @@ function Navbar() {
                 <li>
                     <Link to="/new" className='bg-slate-200 px-2 py-1'>Nueva Obra</Link>                    
                 </li>
+                <li>
+                   <Link to="/FormTemplate" className='bg-slate-200 px-2 py-1'>Template formulario</Link> 
+                </li>
             </ul>
        </div> 
     )

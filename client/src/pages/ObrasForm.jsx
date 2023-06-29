@@ -13,8 +13,8 @@ function ObrasForm() {
         estado:"",
         fechaini:"",
         fechafin:"",
-        idCliente:"",
-        idEmpl:""
+        cliente:"",
+        empleado:""
     })
     
     const inputFechafinDisabled = {

@@ -4,7 +4,7 @@ export const getObras = async (req,res) =>{
         const [result] = await pool.query('SELECT *FROM obras ORDER BY idObra DESC')
         res.json(result)            
     } catch (error) {
-        return res.status(500).json({message: error.mensage})
+        return res.status(500).json({message: error.message})
     }         
 }
 
@@ -16,7 +16,7 @@ export const getObra = async (req,res) =>{
         }
         return res.json(result[0])        
     } catch (error) {
-        return res.status(500).json({message: error.mensage})
+        return res.status(500).json({message: error.message})
     }
 }
 
@@ -36,7 +36,7 @@ export const createObra = async (req,res) =>{
             empleado
         })        
     } catch (error) {
-        return res.status(500).json({message: error.mensage})
+        return res.status(500).json({message: error.message})
     }
 
 }
@@ -49,7 +49,7 @@ export const updateObra = async (req,res) =>{
         }
         return res.status(204).send("Obra actualizada con exito!")        
     } catch (error) {
-        return res.status(500).json({message: error.mensage})   
+        return res.status(500).json({message: error.message})   
     }
 }
 
@@ -61,6 +61,6 @@ export const deleteObra = async (req,res) =>{
         }
         return res.status(204).send("Obra eliminada con exito")        
     } catch (error) {
-        return res.status(500).json({message: error.mensage})           
+        return res.status(500).json({message: error.message})           
     }
 }

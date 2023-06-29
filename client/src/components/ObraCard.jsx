@@ -18,6 +18,9 @@ function ObraCard({obra}) {
                 <button className="bg-slate-800 px-2 py-1 text-white" onClick={ ()=> navigate(`/edit/${obra.idObra}`)}>
                     Edit
                 </button>
+                <button className="bg-slate-800 px-2 py-1 text-white" onClick={ ()=> navigate(`/formTemplateEdit/${obra.idObra}`)}>
+                    Edit New template
+                </button>                
                 <button className="bg-red-500 px-2 py-1 text-white" onClick={()=> deleteObra(obra.idObra)}>
                     Delete
                 </button>                

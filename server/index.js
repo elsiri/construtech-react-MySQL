@@ -6,6 +6,7 @@ import { PORT } from "./config.js";
 import indexRoutes from "./routes/index.routes.js"
 import obrasRoutes from "./routes/obras.routes.js"
 import materialesRoutes from "./routes/materiales.routes.js"
+import exphbs from "express-handlebars";
 const app = express()
 const _dirname = dirname(fileURLToPath(import.meta.url))
 app.use(cors());
@@ -17,3 +18,20 @@ app.use(materialesRoutes)
 app.use(express.static(join(_dirname,"../client/dist")))
 app.listen(PORT)
 console.log("server listeing in port: "+PORT)
+
+
+app.engine('.hbs', exphbs.engine({ extname: '.hbs', defaultLayout: "main"}));
+app.set('view engine', 'hbs');
+
+app.use('*/Bootstrap-4-Multi-Select-BsMultiSelect',express.static('public/Bootstrap-4-Multi-Select-BsMultiSelect'));
+app.use('*/css',express.static('public/css'));
+app.use('*/js',express.static('public/js'));
+app.use('*/images',express.static('public/images'));
+
+app.get('/testhtml', (req, res) => {
+    res.render('home');
+});
+
+app.get('/clientNew', (req, res) => {
+    res.render('addCliente');
+});

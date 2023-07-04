@@ -13,7 +13,9 @@ const app = express()
 const _dirname = dirname(fileURLToPath(import.meta.url))
 app.use(cors());
 app.use(express.json())
-
+app.use(express.urlencoded({
+    extended:true
+}))
 app.use(indexRoutes)
 app.use(obrasRoutes)
 app.use(materialesRoutes)

@@ -25,9 +25,6 @@ router.get('/clientNew', (req,res) => {
 });
 
 router.get("/clientsList", async (req,res) =>{
-    // const result = await getClientes();
-    // console.dir(result)
-    // res.render("clientes", {result})
     try {
         const [result] = await pool.query('SELECT *FROM cliente ORDER BY idCli DESC')
         // console.log(result)
@@ -35,8 +32,32 @@ router.get("/clientsList", async (req,res) =>{
     } catch (error) {
         return res.status(500).json({message: error.message})
     }   
-    
-    
+})
+
+router.post("/clientNew", async (req,res) =>{
+    try {
+        const {nombre, email, direccion, telefono, cedula, fecha_nac, estado} = req.body
+        const [result] = await pool.query('INSERT INTO cliente SET nombre = ?, email = ?, direccion = ?, telefono = ?, cedula = ?, fecha_nac = ?, estado = ?',[nombre, email, direccion, telefono, cedula, fecha_nac, estado])
+        if (result.insertId) {
+            res.render("addCliente");
+            console.log(
+                {
+                    id:"Id insertado:"+result.insertId,
+                    nombre, 
+                    email, 
+                    direccion, 
+                    telefono, 
+                    cedula, 
+                    fecha_nac, 
+                    estado
+                }
+            )            
+        } else {
+            console.log(result)
+        }
+    } catch (error) {
+        return res.status(500).json({message: error.message})        
+    }
 })
 
 router.post('/formtest', (req,res) =>{

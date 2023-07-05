@@ -1,13 +1,17 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 ">
-            <form  method="POST" id="form-cliente" action="/clientNew">
+            <form  method="POST" id="form-cliente" action="/clientEdit">
               <div class="card text-center w-100">
                 <div class="card-header bg-primary text-white">
-                  <h2>Agregar cliente</h2>
-                </div>            
-                {{> clientForm}}
-              </div>                
+                  <h2>Editar cliente</h2>
+                </div>    
+                {{#if result}}
+                    {{#each result}}
+                      {{> clientForm}}
+                    {{/each}}
+                {{/if}}
+              </div>
             </form>
           </div>
         </div>

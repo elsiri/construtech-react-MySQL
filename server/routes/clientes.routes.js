@@ -55,9 +55,9 @@ router.get("/clientsList", async (req,res) =>{
 
 router.post("/clientsList", async (req,res) =>{
     try {
-        const {nombre, estado} = req.body
-        const [result] = await pool.query("SELECT * FROM cliente WHERE nombre LIKE ?", ["%"+nombre+"%"])
-        console.log(result)
+        const {nombre, estado, fecha_nac} = req.body
+        const [result] = await pool.query("SELECT * FROM cliente WHERE nombre LIKE ? OR estado LIKE ? OR fecha_nac LIKE ?", ["%"+nombre+"%", "%"+estado+"%", "%"+fecha_nac+"%"])
+        // console.log(result)
         res.render("clientes", {result: result,message:{type:2}})                
     } catch (error) {
         console.log(error)
@@ -101,6 +101,21 @@ router.post("/clientEdit", async (req,res) =>{
             res.render("clientes", {result:clientes,message:{type:1,content:`Cliente editado con exito! id afectado: ${result.insertId}`}});          
         } else {
             res.render("clientes", {result:clientes,message:{type:1,content:`Error al intentar editar cliente: ${result.insertId}`}});
+        }
+    } catch (error) {
+        return res.status(500).json({message: error.message})        
+    }
+})
+
+router.post('/clientStatus', async (req,res) =>{
+    try {
+        let message = '';
+        const {idCli,estado} = req.body
+        const [result] = await pool.query('UPDATE cliente SET estado = ? WHERE idCli = ?',[estado, idCli])     
+        if (result.affectedRows > 0) { 
+            return message = "Success"
+        }else{
+            return message = "Error"
         }
     } catch (error) {
         return res.status(500).json({message: error.message})        

@@ -26,7 +26,24 @@ app.listen(PORT)
 console.log("server listeing in port: "+PORT)
 
 
-app.engine('.hbs', exphbs.engine({ extname: '.hbs', defaultLayout: "main"}));
+app.engine('.hbs', exphbs.engine({ 
+    extname: '.hbs', 
+    defaultLayout: "main", 
+    helpers:{ 
+        calculo: function (value) {
+                return value + 7;
+        },
+        switchStatus: function (value){
+            if (value ===1) {
+                return "checked";
+            }else{
+                return "";
+            }
+        }
+
+
+    }
+}));
 app.set('view engine', 'hbs');
 
 app.use('*/Bootstrap-4-Multi-Select-BsMultiSelect',express.static('public/Bootstrap-4-Multi-Select-BsMultiSelect'));

@@ -22,13 +22,16 @@
                     </div>
                     <div class="col-6 mt-3">
                       <label for="estado" class="form-label">Estado <span class="text-danger">*</span></label>
-                      
                       <select id="estado" name="estado" class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option selected value="">Seleccione estado</option>
-                        <option value="1">Activo</option>
-                        <option value="0">Inactivo</option>
+                        <option value="1" {{selectOptionSelected this.estado}}>Activo</option>
+                        <option value="0" {{selectOptionSelected this.estado}}>Inactivo</option>
                       </select>
                     </div>
+                    <div class="col-6 mt-3">
+                      <label class="form-label">Fecha nacimiento</label>
+                      <input id="fecha_nac" name="fecha_nac" type="text" class="form-control" placeholder="Fecha de nacimiento"  value="{{this.fecha_nac}}">                                  
+                    </div>                    
                     {{#if this.idCli}}
                         <input type="hidden" name="idCli" id="idCli" value="{{this.idCli}}">
                     {{/if}}

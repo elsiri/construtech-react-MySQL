@@ -17,8 +17,10 @@
         </div>
       </div>
 
-<script type="text/javascript" src="js/jquery-3.6.0.js"></script>    
+<script type="text/javascript" src="js/jquery-3.6.0.js"></script> 
+<script type="text/javascript" src="js/jquery-ui.js"></script>   
 <script>      
+  $("#fecha_nac").datepicker({ dateFormat: 'yy/mm/dd',changeYear: true }).datepicker("option", "showAnim", "slide");  
   let formClient = $("#form-cliente");
   $("#form-cliente").submit(async function(e){
     /*$('#add').on('click', async function(){*/

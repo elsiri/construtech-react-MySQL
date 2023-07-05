@@ -39,6 +39,13 @@ app.engine('.hbs', exphbs.engine({
             }else{
                 return "";
             }
+        },
+        selectOptionSelected: function(value){
+            if (value ===1) {
+                return "selected"
+            }else if(value ===0){
+                return "selected"
+            }
         }
 
 

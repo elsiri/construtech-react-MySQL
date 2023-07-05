@@ -55,9 +55,9 @@ router.get("/clientsList", async (req,res) =>{
 
 router.post("/clientsList", async (req,res) =>{
     try {
-        const {nombre, estado, fecha_nac} = req.body
-        const [result] = await pool.query("SELECT * FROM cliente WHERE nombre LIKE ? OR estado LIKE ? OR fecha_nac LIKE ?", ["%"+nombre+"%", "%"+estado+"%", "%"+fecha_nac+"%"])
-        // console.log(result)
+        const {nombre, estado, fecha_nac_desde, fecha_nac_hasta} = req.body
+        const [result] = await pool.query("SELECT * FROM cliente WHERE nombre LIKE ? AND estado = ? OR fecha_nac BETWEEN ? AND ?", ["%"+nombre+"%", estado, fecha_nac_desde, fecha_nac_hasta])
+        //console.log(result)
         res.render("clientes", {result: result,message:{type:2}})                
     } catch (error) {
         console.log(error)

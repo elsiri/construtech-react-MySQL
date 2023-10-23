@@ -18,6 +18,7 @@ model Empleado {
   email                 String                  @db.VarChar(100)
   telefono              String                  @db.VarChar(10)
   direccion             String                  @db.VarChar(50)
+  estado                Int                     @db.Int @default(1)
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @updatedAt
   Empleado_Especialidad Empleado_Especialidad[]

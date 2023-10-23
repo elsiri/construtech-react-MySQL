@@ -1,12 +1,85 @@
 import {pool} from "../db.js"
-export const getEmpleados = async (req,res) =>{
-    try {
-        const [result] = await pool.query('SELECT *FROM empleado ORDER BY idEmp DESC')
-        res.json(result)            
-    } catch (error) {
-        return res.status(500).json({message: error.message})
-    }         
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
+
+export async function main() {
+    const result = await prisma.empleado.findMany({
+        select:{
+            nombre:true,
+            Empleado_Especialidad:{
+                select:{
+                    especialidad:true
+                }
+            }
+        }
+    })
+    result.forEach(element => {
+        console.log(`Nombre: ${element.nombre}`)
+        element.Empleado_Especialidad.forEach(element2 => {
+            console.log(`Especialidad: ${element2.especialidad.especialidad}`);
+        });
+    });
+    // result.forEach(empleado =>{
+    //     console.log("*********************")
+    //     console.log(`Empleado ${empleado.idEmp}: ${empleado.nombre}`);
+
+    //     empleado.Empleado_Especialidad.forEach(async (esp, i) => {
+    //         const result2 = await prisma.especialidad.findMany({
+    //             where:{
+                    
+    //             }
+    //         })
+    //         console.log(`Especialidad: ${result2.especialidad}`)
+    //     })
+    // })
+
+    // const empleados = await prisma.empleado.findMany()
+    // empleados.map(empleado => {
+    //     console.log(`${empleado.nombre} - ${empleado.tipoDoc} - ${empleado.cedula}`)
+    // })
+    // const empleado = await prisma.empleado.findFirst({
+    //     where:{
+    //         idEmp:2
+    //     }
+    // })
+    // console.log(empleado.nombre)
+
+    // const deleteEmpleado = await prisma.empleado.delete({
+    //     where:{
+    //         idEmp:2
+    //     }
+    // })
+    // console.log(deleteEmpleado)
+
+    // const editEmpleado = await prisma.empleado.update({
+    //     where:{
+    //         idEmp: 2
+    //     },
+    //     data:{
+    //         nombre: "Anibal"
+    //     }
+    // })
+    // console.log(editEmpleado)
+    // const editEmpleados = await prisma.empleado.updateMany({
+    //     where: {
+    //         nombre: "Kevin"
+    //     },
+    //     data:{
+    //         cedula: "1234567890"
+    //     }
+    // })
+    // console.log(editEmpleados)
 }
+
+// export const getEmpleados = async (req,res) =>{
+//     try {
+//         const [result] = await pool.query('SELECT *FROM empleado ORDER BY idEmp DESC')
+//         res.json(result)            
+//     } catch (error) {
+//         return res.status(500).json({message: error.message})
+//     }         
+// }
 
 export const getEmpleado = async (req,res) =>{
     try {
@@ -63,3 +136,5 @@ export const deleteEmpleado = async (req,res) =>{
         return res.status(500).json({message: error.message})           
     }
 }
+
+main()

@@ -11,7 +11,8 @@ const user = {
 }
 const navigation = [
   { name: 'OBRAS', href: '/obras', current: true, subpage:{status:true,subname:"Agregar obra"} },
-  { name: 'Materiales', href: '/materiales', current: false }
+  { name: 'Materiales', href: '/materiales', current: false },
+  { name: 'Empleados', href: '/empleados', current: false }
 ]
 const userNavigation = [
   { name: 'Mi perfil', href: '#' },

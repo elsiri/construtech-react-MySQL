@@ -2,13 +2,16 @@ import { Route, Routes } from "react-router-dom";
 import ObrasPage from "./pages/ObrasPage";
 import ObrasForm from "./pages/ObrasForm";
 import MaterialesPage from "./pages/MaterialesPage";
+import EmpleadosPage from "./pages/EmpleadosPage";
 import FormMaterial from "./pages/FormMaterial";
 import FormTemplate from "./pages/FormTemplate";
+import EmpleadosForm from "./pages/EmpleadosForm";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import { MaterialContextProvider } from "./context/MaterialesProvider";
 import { ObraContextProvider } from "./context/ObrasProvider";
+import { EmpleadoContextProvider } from "./context/EmpleadosProvider";
 function App() {
   return (
     <div className="">
@@ -22,7 +25,7 @@ function App() {
             <Route path="/edit/:id" element={<ObrasForm />} />
             <Route path="/formTemplate" element={<FormTemplate />} />      
             <Route path="/formTemplateEdit/:id" element={<FormTemplate />} />                  
-            {/* <Route path="/obras/*" element={<NotFound />} />                       */}
+          {/* <Route path="/obras/*" element={<NotFound />} /> */}
           </Routes>           
         </ObraContextProvider> 
         <MaterialContextProvider>
@@ -33,6 +36,13 @@ function App() {
             {/* <Route path="/materiales/*" element={<NotFound />} /> */}
           </Routes>
         </MaterialContextProvider>
+        <EmpleadoContextProvider>
+          <Routes>
+            <Route path="/empleados" element={<EmpleadosPage/>} />
+            <Route path="/agregarEmpleado" element={<EmpleadosForm/>} />
+            <Route path="/editarEmpleado/:id" element={<EmpleadosForm/>} />
+          </Routes>
+        </EmpleadoContextProvider>
       </div>
     </div>
   )

@@ -4,7 +4,8 @@ import {
     getEmpleado,
     createEmpleado,
     updateEmpleado,
-    deleteEmpleado
+    deleteEmpleado,
+    getEmpleadosEspecialidades
 } from "../controllers/empleados.controller.js"
 
 const router = Router()
@@ -19,4 +20,6 @@ router.put("/empleado/:id", updateEmpleado)
 
 router.delete("/empleado/:id", deleteEmpleado)
 
- export default router
+router.get("/empleadosEsp", getEmpleadosEspecialidades)
+
+export default router

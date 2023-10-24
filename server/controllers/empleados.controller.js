@@ -1,10 +1,12 @@
+import { json } from "express"
 import {pool} from "../db.js"
 import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-export async function main() {
-    const result = await prisma.empleado.findMany({
+export  const getEmpleadosEspecialidades = async (req,res) =>{
+    try {
+    const result= await prisma.empleado.findMany({
         select:{
             nombre:true,
             Empleado_Especialidad:{
@@ -14,12 +16,18 @@ export async function main() {
             }
         }
     })
-    result.forEach(element => {
-        console.log(`Nombre: ${element.nombre}`)
-        element.Empleado_Especialidad.forEach(element2 => {
-            console.log(`Especialidad: ${element2.especialidad.especialidad}`);
-        });
-    });
+    // result.forEach(element => {
+    //     console.log(`Nombre: ${element.nombre}`)
+    //     element.Empleado_Especialidad.forEach(element2 => {
+    //         console.log(`Especialidad: ${element2.especialidad.especialidad}`);
+    //     });
+    // });    
+    res.json(result)
+    console.log(result);
+        
+    } catch (error) {
+        return res.status(500).json({message: error.message})
+    }
     // result.forEach(empleado =>{
     //     console.log("*********************")
     //     console.log(`Empleado ${empleado.idEmp}: ${empleado.nombre}`);
@@ -72,14 +80,14 @@ export async function main() {
     // console.log(editEmpleados)
 }
 
-// export const getEmpleados = async (req,res) =>{
-//     try {
-//         const [result] = await pool.query('SELECT *FROM empleado ORDER BY idEmp DESC')
-//         res.json(result)            
-//     } catch (error) {
-//         return res.status(500).json({message: error.message})
-//     }         
-// }
+export const getEmpleados = async (req,res) =>{
+    try {
+        const [result] = await pool.query('SELECT *FROM empleado ORDER BY idEmp DESC')
+        res.json(result)            
+    } catch (error) {
+        return res.status(500).json({message: error.message})
+    }         
+}
 
 export const getEmpleado = async (req,res) =>{
     try {
@@ -136,5 +144,3 @@ export const deleteEmpleado = async (req,res) =>{
         return res.status(500).json({message: error.message})           
     }
 }
-
-main()

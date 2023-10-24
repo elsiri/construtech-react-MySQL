@@ -82,12 +82,21 @@ export  const getEmpleadosEspecialidades = async (req,res) =>{
 
 export const getEmpleados = async (req,res) =>{
     try {
-        const [result] = await pool.query('SELECT *FROM empleado ORDER BY idEmp DESC')
-        res.json(result)            
+        const result = await prisma.empleado.findMany()
+        res.json(result)
     } catch (error) {
-        return res.status(500).json({message: error.message})
-    }         
+        return json({message: error.message})
+    }
 }
+
+// export const getEmpleados = async (req,res) =>{
+//     try {
+//         const [result] = await pool.query('SELECT *FROM empleado ORDER BY idEmp DESC')
+//         res.json(result)            
+//     } catch (error) {
+//         return res.status(500).json({message: error.message})
+//     }         
+// }
 
 export const getEmpleado = async (req,res) =>{
     try {

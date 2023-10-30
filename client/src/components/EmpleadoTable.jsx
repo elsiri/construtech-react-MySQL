@@ -2,39 +2,13 @@ import { useEmpleados } from "../context/EmpleadosProvider";
 import { useNavigate } from "react-router-dom";
 import { Card, Typography } from "@material-tailwind/react";
  
-const TABLE_HEAD = ["Name", "Job", "Employed", "Accion"];
+const TABLE_HEAD = ["Nombre", "Correo", "Teléfono", "Cédula", "Especialidad", "Estado", "Accion"];
  
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
-];
  
 export default function EmpleadoTable({empleados}) {
+  const navigate = useNavigate()
   return (
-    <Card className="h-full w-full overflow-scroll">
+    <div>
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
@@ -55,8 +29,8 @@ export default function EmpleadoTable({empleados}) {
           </tr>
         </thead>
         <tbody>
-          {empleados.map(({ idEmp, nombre, cedula, email }, index) => {
-            const isLast = index === TABLE_ROWS.length - 1;
+          {empleados.map(({ idEmp, nombre, email, telefono, cedula, estado }, index) => {
+            const isLast = index === empleados.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
             return (
@@ -76,7 +50,7 @@ export default function EmpleadoTable({empleados}) {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {cedula}
+                    {email}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -85,7 +59,34 @@ export default function EmpleadoTable({empleados}) {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {email}
+                    {telefono}
+                  </Typography>
+                </td>
+                <td className={classes}>
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {cedula}
+                  </Typography>
+                </td>   
+                <td className={classes}>
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {"Especialidad"}
+                  </Typography>
+                </td>                             
+                <td className={classes}>
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {estado}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -96,7 +97,7 @@ export default function EmpleadoTable({empleados}) {
                     color="blue-gray"
                     className="font-medium"
                   >
-                <button className="bg-slate-800 px-2 py-1 text-white" onClick={ ()=> navigate(`/editarEmpleado/${empleado.idEmp}`)}>
+                <button className="bg-slate-800 px-2 py-1 text-white" onClick={ ()=> navigate(`/editarEmpleado/${idEmp}`)}>
                     Editar
                 </button> 
                   </Typography>
@@ -106,6 +107,6 @@ export default function EmpleadoTable({empleados}) {
           })}
         </tbody>
       </table>
-    </Card>
+    </div>
   );
 }

@@ -34,7 +34,6 @@ export default function EmpleadosForm() {
                     nombre:empleado.nombre,
                     direccion:empleado.direccion,
                     estado:empleado.estado,
-                    direccion:empleado.direccion,
                     email:empleado.email,
                     telefono:empleado.telefono,
                     tipoDoc:empleado.tipoDoc,

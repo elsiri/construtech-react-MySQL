@@ -1,4 +1,4 @@
-import { useEmpleados } from "../context/EmpleadosProvider";
+//import { useEmpleados } from "../context/EmpleadosProvider";
 import { useNavigate } from "react-router-dom";
 // import { Card, Typography } from "@material-tailwind/react";
  
@@ -9,55 +9,46 @@ export default function EmpleadoTable({empleados}) {
   const navigate = useNavigate()
   return (
     <div>
-      <table className="">
+      <table id="table" className="table table-striped table-sm">
         <thead>
           <tr>
-            {TABLE_HEAD.map((head) => (
-              <th
-                key={head}
-                className=""
-              >
-                  {head}
-              </th>
-            ))}
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Telófono</th>
+            <th scope="col">Cédula</th>
+            <th scope="col">Especialidad</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acción</th>
           </tr>
         </thead>
         <tbody>
           {empleados.map(({ idEmp, nombre, email, telefono, cedula, estado }, index) => {
-            const isLast = index === empleados.length - 1;
-            const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
- 
             return (
               <tr key={idEmp}>
-                <td className={classes}>
-                    {nombre}
-                  
+                <td>{idEmp}</td>
+                <td>{nombre}</td>
+                <td>{email}</td>
+                <td>{telefono}</td>
+                <td>{cedula}</td>
+                <td>{estado}</td>
+                <td>
+                  <div className="form-check form-switch">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="flexSwitchCheckDefault"
+                    />
+                  </div>
                 </td>
-                <td className={classes}>
-                    {email}
-                  
-                </td>
-                <td className={classes}>
-                    {telefono}
-                  
-                </td>
-                <td className={classes}>
-                    {cedula}
-                  
-                </td>   
-                <td className={classes}>
-                    {"Especialidad"}
-                  
-                </td>                             
-                <td className={classes}>
-                    {estado}
-                  
-                </td>
-                <td className={classes}>
-
-                <button className="" onClick={ ()=> navigate(`/editarEmpleado/${idEmp}`)}>
-                    Editar
-                </button> 
+                <td>
+                  <a
+                    className="btn bg-secondary text-white"
+                    href="editempleado.html"
+                  >
+                    {" "}
+                    Editar <span data-feather="edit-3" />{" "}
+                  </a>
                 </td>
               </tr>
             );

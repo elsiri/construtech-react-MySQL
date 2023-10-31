@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import ObrasPage from "./pages/ObrasPage";
 import ObrasForm from "./pages/ObrasForm";
 import MaterialesPage from "./pages/MaterialesPage";

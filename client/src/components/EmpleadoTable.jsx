@@ -1,12 +1,21 @@
 //import { useEmpleados } from "../context/EmpleadosProvider";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { Card, Typography } from "@material-tailwind/react";
  
-const TABLE_HEAD = ["Nombre", "Correo", "Teléfono", "Cédula", "Especialidad", "Estado", "Accion"];
- 
- 
 export default function EmpleadoTable({empleados}) {
+  const empleadosData = empleados
   const navigate = useNavigate()
+  const [estadoEpm, setStatus] = useState()
+  const handleClick = (idEmp, estado) => {
+    const newStatus = estado === 1 ? 0 : 1
+    console.log(idEmp+"-"+estado+"-"+newStatus)
+    setStatus(newStatus)
+  }
+  // const toggleStatus = (idEmp, status) => {
+  //   const newStatus = status === 1 ? 0 : 1
+  //   setStatus(newStatus)
+  // }
   return (
     <div>
       <table id="table" className="table table-striped table-sm">
@@ -23,7 +32,7 @@ export default function EmpleadoTable({empleados}) {
           </tr>
         </thead>
         <tbody>
-          {empleados.map(({ idEmp, nombre, email, telefono, cedula, estado }, index) => {
+          {empleadosData.map(({ idEmp, nombre, email, telefono, cedula, estado }) => {
             return (
               <tr key={idEmp}>
                 <td>{idEmp}</td>
@@ -37,14 +46,18 @@ export default function EmpleadoTable({empleados}) {
                     <input
                       className="form-check-input"
                       type="checkbox"
-                      id="flexSwitchCheckDefault"
+                      id="flexSwitchCheckDefault" 
+                      value={estado} 
+                      checked
+                      onChange={() => handleClick(idEmp, estado)}
                     />
                   </div>
+                  {estado}
                 </td>
                 <td>
                   <a
                     className="btn bg-secondary text-white"
-                    href="editempleado.html"
+                    onClick={ ()=> navigate(`/editarEmpleado/${idEmp}`)}
                   >
                     {" "}
                     Editar <span data-feather="edit-3" />{" "}

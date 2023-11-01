@@ -1,4 +1,3 @@
-import Logo from "../assets/img/logo.png";
 import { Link } from "react-router-dom";
 export default function Sidebar() {
 
@@ -10,11 +9,9 @@ export default function Sidebar() {
     <div className="position-sticky pt-3">
       <ul className="nav flex-column">
         <li className="nav-item">
-        <Link to="/">
-          <a className="nav-link" aria-current="page" href="index.html">
-            <i className="fa-solid fa-gauge-high" />
-            Inicio
-          </a>
+        <Link className="nav-link" to="/"> 
+          <i className="fa-solid fa-gauge-high" />
+             Inicio
         </Link>
         </li>
         <li className="nav-item">
@@ -30,11 +27,9 @@ export default function Sidebar() {
           </a>
         </li>
         <li className="nav-item">
-        <Link to="/empleados">
-          <a className="nav-link active">
+        <Link className="nav-link active" to="/empleados">
             <i className="fa-solid fa-user-group" />
             Empleados
-          </a>
         </Link>
         </li>
         <li className="nav-item">

@@ -1,6 +1,4 @@
 import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import  Button  from 'react-bootstrap/Button';
 import Logo from "../assets/img/logo.png";
 

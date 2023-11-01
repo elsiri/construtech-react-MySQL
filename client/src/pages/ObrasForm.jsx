@@ -39,7 +39,7 @@ function ObrasForm() {
             }
         }
         loadObras()
-    })
+    }, [params.id])
 
     return(
         <div className="">

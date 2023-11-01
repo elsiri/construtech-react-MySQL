@@ -4,7 +4,9 @@ import { CreateEmpleadoRequest,
     UpdateEmpleadoRequest,
     DeleteEmpleadoRequest,
     GetEmpleadosRequest,
-    ToggleEmpleadoStatusRequest
+    ToggleEmpleadoStatusRequest,
+    GetEspecialidadesRequest,
+    CreateEspecialidadesRequest
 } from "../api/Empleados.api";
 import { EmpleadoContext } from "./EmpleadosContext";
 
@@ -21,16 +23,30 @@ export const useEmpleados = () => {
 export const EmpleadoContextProvider = ({children}) => {
 
     const [empleados, setEmpleados] = useState([])
-
+    const [especialidades, setEspecialidades] = useState([])
     async function Empleados() {
         const response = await GetEmpleadosRequest()
         console.log(response.data)  
         setEmpleados(response.data)          
     }  
 
+    async function Especialidades(){
+        const response = await GetEspecialidadesRequest()
+        setEspecialidades(response.data)     
+    }
+
     const createEmpleado = async (empleado) => {
         try {
             const response = await CreateEmpleadoRequest(empleado)
+            console.log(response)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const createEspecialidad = async (especialidad) => {
+        try {
+            const response = await CreateEspecialidadesRequest(especialidad)
             console.log(response)
         } catch (error) {
             console.error(error)
@@ -50,6 +66,7 @@ export const EmpleadoContextProvider = ({children}) => {
         try {
             const response = await DeleteEmpleadoRequest(idEmp)
             setEmpleados(empleados.filter(empleado => empleado.idEmp !== idEmp))
+            console.log(response);
         } catch (error) {
             console.error(error)
         }
@@ -82,7 +99,7 @@ export const EmpleadoContextProvider = ({children}) => {
         }
     }
     return (
-        <EmpleadoContext.Provider value={{empleados, Empleados, deleteEmpleado, createEmpleado, getEmpleado, updateEmpleado, toggleEmpleadoStatus}}>
+        <EmpleadoContext.Provider value={{empleados, Empleados, deleteEmpleado, createEmpleado, getEmpleado, updateEmpleado, toggleEmpleadoStatus, especialidades, Especialidades, createEspecialidad}}>
             {children}
         </EmpleadoContext.Provider>
     )
